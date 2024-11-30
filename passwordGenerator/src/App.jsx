@@ -10,82 +10,84 @@ function App() {
   const generatePassword = useCallback(() => {
     let pass = "";
     let str = "ABCDEFGHIJKLMNOPQRSTabcdefghijklmnop";
-    let number = "123456789"
-    let specialChar = "!@#$%&*?/"
+    let number = "123456789";
+    let specialChar = "!@#$%&*?/";
 
-    if (isNumber) {
-       str += number      
-    }
-    if (isChar) {
-       str += specialChar      
-    }
+    if (isNumber) str += number;
+    if (isChar) str += specialChar;
 
     for (let i = 0; i < passlength; i++) {
-      let char  = Math.floor(Math.random() * str.length  ) 
-      pass += str[char]
+      let char = Math.floor(Math.random() * str.length);
+      pass += str[char];
     }
-    setPassword(pass)
-  }, [
-    passlength,
-    isNumber,
-    isChar,
-  ]);
+    setPassword(pass);
+  }, [passlength, isNumber, isChar]);
 
-  useEffect(()=>{
-    generatePassword()
-  }, [passlength, isChar, isNumber, generatePassword])
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(password).then(() => {
+      alert("Password copied to clipboard!");
+    });
+  };
+
+  useEffect(() => {
+    generatePassword();
+  }, [passlength, isChar, isNumber, generatePassword]);
 
   return (
-    <>
-      <div className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 text-orange-500 bg-gray-800">
-      <h1 className="text-4xl text-centre my-3 text-white">Password Generator</h1>
-        <div className="flex shadow rounded-lg overflow-hidden mb-4" >
-          <input 
+    <div className="w-full max-w-lg mx-auto shadow-lg rounded-lg px-6 py-5 my-10 bg-gradient-to-r from-gray-900 to-gray-700 text-white">
+      <h1 className="text-3xl text-center my-4 font-bold text-purple-400">
+        Password Generator
+      </h1>
+      <div className="flex shadow rounded-lg overflow-hidden mb-6 border-2 border-purple-500">
+        <input
           type="text"
           value={password}
-          className="outline-none w-full py-1 px-3"
-          placeholder="Password"
+          className="outline-none w-full py-3 px-4 text-lg bg-gray-800 text-white placeholder-gray-400"
+          placeholder="Generated Password"
           readOnly
-           />
-           <button className="bg-blue-600 px-3 py-2.5 outline-none text-white">Copy</button>
-        </div>
-        <div className="flex text-sm gap-x-2">
-          <div className="flex items-center gap-x-1">
-            <input type="range" 
-            min={8}  
+        />
+        <button
+          className="bg-purple-600 hover:bg-purple-700 px-4 py-3 outline-none text-white font-medium transition duration-200"
+          onClick={copyToClipboard}
+        >
+          Copy
+        </button>
+      </div>
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <label className="text-lg">Password Length:</label>
+          <input
+            type="range"
+            min={8}
             max={30}
             value={passlength}
-            className="cursor-pointer"
-            onChange={(e)=>{
-              {setPassLength(e.target.value)}
-            }}
+            className="cursor-pointer accent-purple-500"
+            onChange={(e) => setPassLength(e.target.value)}
           />
-          <label >Length: {passlength}</label>
-          </div>
-
-          <div className="flex items-center gap-x-1" >
-            <input type="checkbox"
-             id="numberInput"
-             defaultChecked ={isNumber}
-             onChange={()=>{
-              setIsNumber((prev) => !prev)
-             }} />
-             <label htmlFor="numberInput">Numbers</label>
-          </div>
-
-          <div className="flex items-center gap-x-1" >
-            <input type="checkbox"
-             id="characterInput"
-             defaultChecked ={isChar}
-             onChange={()=>{
-              setIsChar((prev) => !prev)
-             }} />
-             <label htmlFor="characterInput">Characters</label>
-          </div>
-
+          <span className="text-lg font-medium">{passlength}</span>
+        </div>
+        <div className="flex items-center space-x-4">
+          <label className="flex items-center space-x-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={isNumber}
+              className="accent-purple-500 cursor-pointer"
+              onChange={() => setIsNumber((prev) => !prev)}
+            />
+            <span>Include Numbers</span>
+          </label>
+          <label className="flex items-center space-x-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={isChar}
+              className="accent-purple-500 cursor-pointer"
+              onChange={() => setIsChar((prev) => !prev)}
+            />
+            <span>Include Special Characters</span>
+          </label>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
