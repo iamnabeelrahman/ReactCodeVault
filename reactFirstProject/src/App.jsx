@@ -11,7 +11,7 @@ function App() {
      <Card name = "Tariq" profession="Software Engineer" companyName="XYZ"></Card>
      <Card name = "Zaid" profession="Mechanical Engineer" companyName="KLM"></Card>
      <Card name = "Masoo" profession="Electronics Engineer" companyName="ABZ"></Card>
-    </>
+    </> 
   );
 }
 
