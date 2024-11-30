@@ -58,7 +58,7 @@ function App() {
           <label className="text-lg">Password Length:</label>
           <input
             type="range"
-            min={8}
+            min={6}
             max={30}
             value={passlength}
             className="cursor-pointer accent-purple-500"
