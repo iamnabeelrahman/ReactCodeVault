@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { FaLinkedin, FaTwitter } from "react-icons/fa"; 
 import "./App.css";
 
 function App() {
@@ -87,6 +88,30 @@ function App() {
           </label>
         </div>
       </div>
+      
+      <footer className="fixed bottom-0 left-0 w-full bg-gray-800 py-4 text-center text-white">
+        <p className="text-lg font-medium">Project by Nabeel Rahman</p>
+        <div className="flex justify-center space-x-4 mt-2">
+          <a
+            href="https://www.linkedin.com/in/iamnabeelrahman/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center space-x-2 text-blue-500 hover:text-blue-700 transition duration-300"
+          >
+            <FaLinkedin className="text-2xl" />
+            <span>LinkedIn</span>
+          </a>
+          <a
+            href="https://x.com/iamnabeelrahman"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center space-x-2 text-blue-400 hover:text-blue-600 transition duration-300"
+          >
+            <FaTwitter className="text-2xl" />
+            <span>X</span>
+          </a>
+        </div>
+      </footer>
     </div>
   );
 }
