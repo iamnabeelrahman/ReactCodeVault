@@ -149,7 +149,7 @@ function App() {
             href="https://www.linkedin.com/in/iamnabeelrahman/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center space-x-2 text-blue-400 hover:underline"
+            className="flex items-center space-x-2 text-blue-500 hover:text-blue-700 transition duration-300"
           >
             <FaLinkedin className="text-2xl" />
             <span>LinkedIn</span>
@@ -158,7 +158,7 @@ function App() {
             href="https://x.com/iamnabeelrahman"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center space-x-2 text-blue-400 hover:underline"
+            className="flex items-center space-x-2 text-blue-400 hover:text-blue-600 transition duration-300"
           >
             <FaTwitter className="text-2xl" />
             <span>X</span>
