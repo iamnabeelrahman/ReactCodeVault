@@ -1,14 +1,21 @@
 import { useState } from "react";
-import "./App.css";  // Tailwind will handle most of the styling
+import { FaLinkedin, FaTwitter } from "react-icons/fa";
 import useCurrencyInfo from "./hooks/useCurrencyInfo";
 
 function App() {
   const [currentCurrency, setCurrentCurrency] = useState("inr");
-  const [desiredCurrency, setDesiredCurrency] = useState("");
+  const [desiredCurrency, setDesiredCurrency] = useState("inr");
   const [amount, setAmount] = useState("");
   const [convertedAmount, setConvertedAmount] = useState(null);
 
   const currencyValue = useCurrencyInfo(currentCurrency);
+  const Allcurrency = Object.keys(currencyValue);
+
+  const swap = () => {
+    const tempCurrency = currentCurrency;
+    setCurrentCurrency(desiredCurrency);
+    setDesiredCurrency(tempCurrency);
+  };
 
   const handleCurrentCurrency = (event) => {
     setCurrentCurrency(event.target.value);
@@ -19,8 +26,6 @@ function App() {
 
   const handleAmountChange = (event) => {
     const value = event.target.value;
-
-    // Allow only integers or decimals (e.g., 123 or 123.45)
     if (/^\d*\.?\d*$/.test(value)) {
       setAmount(value);
     }
@@ -28,7 +33,7 @@ function App() {
 
   const convertCurrency = () => {
     const numericAmount = parseFloat(amount);
-    const currencyRate = parseFloat(currencyValue["dzd"]);
+    const currencyRate = parseFloat(currencyValue[desiredCurrency]);
 
     if (isNaN(numericAmount) || isNaN(currencyRate)) {
       setConvertedAmount("Invalid Amount or Currency");
@@ -40,13 +45,13 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-teal-100 to-blue-200 flex justify-center items-center">
-      <div className="container mx-auto p-8 max-w-lg bg-white rounded-xl shadow-lg">
+    <div className="min-h-screen flex flex-col bg-gradient-to-r from-teal-100 to-blue-200">
+      <div className="container mx-auto p-8 max-w-lg bg-white rounded-xl shadow-lg mt-10 flex-grow">
         <h1 className="text-center text-3xl font-semibold text-gray-800 mb-6">
           Currency Converter
         </h1>
 
-        <div className="flex flex-col sm:flex-row sm:justify-between mb-6 space-y-4 sm:space-y-0 sm:space-x-4">
+        <div className="flex flex-col sm:flex-row sm:justify-between mb-6 space-y-4 sm:space-y-0 sm:space-x-4 items-center">
           <div className="w-full sm:w-1/2">
             <label
               className="text-gray-800 text-lg font-medium mb-2 block"
@@ -61,12 +66,21 @@ function App() {
               value={currentCurrency}
               onChange={handleCurrentCurrency}
             >
-              <option value="inr">INR</option>
-              <option value="dzd">Algerian Dinar</option>
-              <option value="aoa">Angolan Kwanza</option>
-              <option value="xof">CFA Franc BCEAO</option>
+              {Allcurrency.map((currency) => (
+                <option key={currency} value={currency}>
+                  {currency}
+                </option>
+              ))}
             </select>
           </div>
+
+          <button
+            onClick={swap}
+            className="p-3 bg-teal-500 text-white rounded-full hover:bg-teal-600 transition duration-200 sm:self-center mt-4"
+            aria-label="Swap currencies"
+          >
+            🔄
+          </button>
 
           <div className="w-full sm:w-1/2">
             <label
@@ -82,10 +96,11 @@ function App() {
               value={desiredCurrency}
               onChange={handleDesiredCurrency}
             >
-              <option value="inr">INR</option>
-              <option value="dzd">Algerian Dinar</option>
-              <option value="aoa">Angolan Kwanza</option>
-              <option value="xof">CFA Franc BCEAO</option>
+              {Allcurrency.map((currency) => (
+                <option key={currency} value={currency}>
+                  {currency}
+                </option>
+              ))}
             </select>
           </div>
         </div>
@@ -111,7 +126,7 @@ function App() {
             onClick={convertCurrency}
             className="w-full p-3 bg-teal-500 text-white font-medium rounded-md hover:bg-teal-600 transition duration-200"
           >
-            Convert
+            {`Convert to ${desiredCurrency}`}
           </button>
         </div>
 
@@ -126,6 +141,30 @@ function App() {
           />
         </div>
       </div>
+
+      <footer className="fixed bottom-0 left-0 w-full bg-gray-900 py-4 text-center text-white">
+        <p className="text-lg font-medium">Project by Nabeel Rahman</p>
+        <div className="flex justify-center space-x-4 mt-2">
+          <a
+            href="https://www.linkedin.com/in/iamnabeelrahman/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center space-x-2 text-blue-400 hover:underline"
+          >
+            <FaLinkedin className="text-2xl" />
+            <span>LinkedIn</span>
+          </a>
+          <a
+            href="https://x.com/iamnabeelrahman"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center space-x-2 text-blue-400 hover:underline"
+          >
+            <FaTwitter className="text-2xl" />
+            <span>X</span>
+          </a>
+        </div>
+      </footer>
     </div>
   );
 }
