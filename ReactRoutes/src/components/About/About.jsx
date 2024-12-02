@@ -12,7 +12,7 @@ export default function About() {
               alt="React development"
             />
           </div>
-          <div className="md:w-7/12 lg:w-6/12">
+          <div className="md:w-7/12 lg:w-7/12">
             <h2 className="text-3xl font-bold text-orange-700 md:text-4xl">
               React Development by Passionate Developers
             </h2>
