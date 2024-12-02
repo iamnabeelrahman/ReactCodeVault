@@ -5,16 +5,17 @@ export default function Home() {
   return (
     <div className="mx-auto w-full max-w-7xl mt-10">
       <aside
-        className="relative overflow-hidden text-gray-800 rounded-lg sm:mx-16 mx-2 sm:py-12"
+        className="relative overflow-hidden text-gray-800 rounded-lg sm:mx-16 mx-2 sm:py-12 py-6"
         style={{
           background: "linear-gradient(135deg, #f3e8ff, #ffe6e6, #e6f7ff)",
         }}
       >
-        <div className="relative z-10 max-w-screen-xl px-4 pb-16 pt-10 sm:py-20 mx-auto sm:px-6 lg:px-8">
-          <div className="max-w-xl sm:mt-1 mt-20 space-y-6 text-center sm:text-right sm:ml-auto">
+        <div className="relative z-10 max-w-screen-xl px-4 sm:py-20 py-10 mx-auto sm:px-6 lg:px-8 flex flex-col-reverse sm:flex-row items-center sm:items-end sm:justify-between">
+          {/* Text Content */}
+          <div className="sm:ml-auto text-center sm:text-right space-y-6 sm:space-y-8">
             <h2 className="text-4xl font-bold sm:text-5xl text-purple-700">
               Download Now
-              <span className="hidden sm:block text-blue-600 text-4xl">
+              <span className="block sm:hidden text-blue-600 text-4xl mt-2">
                 Lorem Ipsum
               </span>
             </h2>
@@ -36,18 +37,20 @@ export default function Home() {
               &nbsp; Download now
             </Link>
           </div>
-        </div>
 
-        <div className="absolute inset-0 w-full sm:my-12 sm:pt-1 pt-10 h-full">
-          <img
-            className="w-72 mx-auto sm:w-96"
-            src="https://i.ibb.co/5BCcDYB/Remote2.png"
-            alt="image1"
-          />
+          {/* Image */}
+          <div className="sm:absolute sm:top-0 sm:left-0 w-full sm:w-auto sm:relative">
+            <img
+              className="w-72 mx-auto sm:w-96"
+              src="https://i.ibb.co/5BCcDYB/Remote2.png"
+              alt="image1"
+            />
+          </div>
         </div>
       </aside>
 
-      <div className="grid place-items-center sm:mt-16">
+      {/* Second Image */}
+      <div className="grid place-items-center sm:mt-16 mt-10">
         <img
           className="sm:w-80 w-40"
           src="https://i.ibb.co/2M7rtLk/Remote1.png"
@@ -55,6 +58,7 @@ export default function Home() {
         />
       </div>
 
+      {/* Heading */}
       <h1 className="text-center text-3xl sm:text-4xl py-10 font-medium text-blue-600">
         Lorem Ipsum Yojo
       </h1>
